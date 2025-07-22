@@ -13,19 +13,23 @@
   "license": "ISC",
   "author": "ovanesstea",
   "type": "module",
-  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --transpile-only index.ts",
-    "start": "ts-node dist/index.js",
-    "build": "tsc"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@types/react": "^19.1.8",
+    "@types/web3": "^1.0.20",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "web3": "^4.16.0"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.4.19"
   }
 }
