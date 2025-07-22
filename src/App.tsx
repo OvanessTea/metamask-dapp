@@ -4,7 +4,7 @@ import { StateType } from "./types/state";
 import { getChainId } from "./lib/getChainId";
 import { getLatestBlock } from "./lib/getLatestBlock";
 import { requestAccounts } from "./lib/requestAccounts";
-import { signMessage } from "./lib/signMessage";
+import { Message } from "./components/Message";
 
 const App = () => {
 
@@ -18,9 +18,6 @@ const App = () => {
 
 	const [buttonDisabled, setButtonDisabled] = useState(false);
 	const [currentAccount, setCurrentAccount] = useState<string | null>(null);
-
-	const [message, setMessage] = useState<string | null>(null);
-	const [signature, setSignature] = useState<string | null>(null);
 
 	const handleConnect = async () => {
 		if (state.web3) {
@@ -83,7 +80,7 @@ const App = () => {
 				<div id="provider">{state.provider}</div>
 				<div id="chainId">{state.chainId}</div>
 				<div id="latestBlock">{state.latestBlock}</div>
-				<div id="currentAccount">{currentAccount}</div>
+				<div id="currentAccount">{currentAccount?.toLocaleLowerCase()}</div>
 				<div>
 					<button
 						id="requestAccounts"
@@ -93,24 +90,7 @@ const App = () => {
 						Connect to Ethereum
 					</button>
 				</div>
-				<div>
-					<input
-						onChange={e => {
-							setMessage(e.target.value);
-						}}
-						id="messageToSign"
-						placeholder="Message to Sign"
-						disabled={currentAccount === null}
-					/>
-					<button
-						onClick={() => signMessage(state.web3, currentAccount, message)}
-						id="signMessage"
-						disabled={currentAccount === null}
-					>
-						Sign Message
-					</button>
-					<div id="signingResult">{signature}</div>
-				</div>
+				<Message web3={state.web3} currentAccount={currentAccount} />
 			</>
 		</div>
 	);
